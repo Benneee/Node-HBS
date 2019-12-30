@@ -1,17 +1,22 @@
 const path = require("path");
 const express = require("express");
-
 const log = console.log;
 
-log(__dirname);
-const publicDirPath = path.join(__dirname, "../public");
+const hbs = require("hbs"); // Loading this in because we want to use partials
 
 const app = express();
 
-// Key value pair to tell express the view engine we would like to use for rendering
-app.set("view engine", "hbs");
+// Define paths for express config
+const publicDirPath = path.join(__dirname, "../public");
+const viewsPath = path.join(__dirname, "../templates/views"); // customising views directory to our choice
+const partialsPath = path.join(__dirname, "../templates/partials");
 
-// app.use helps customise our server
+// Setup handlebars engine and views directory location
+app.set("view engine", "hbs"); // Key value pair to tell express the view engine we would like to use for rendering
+app.set("views", viewsPath);
+hbs.registerPartials(partialsPath);
+
+// Setup static files directory
 app.use(express.static(publicDirPath));
 
 // To ensure our hbs template is rendered in the browser, we set a route
@@ -33,7 +38,9 @@ app.get("/about", (req, res) => {
 app.get("/help", (req, res) => {
   res.render("help", {
     title: "The Help Page",
-    name: "This page will give you all the help you need for the weather app"
+    helpText:
+      "This page will give you all the help you need for the weather app",
+    name: "Benedict Nkeonye"
   });
 });
 
