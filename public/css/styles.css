@@ -10,3 +10,9 @@ h1 {
 .footer {
   text-align: center;
 }
+
+.not-found {
+  text-align: center;
+  font-size: 15rem;
+  padding: 0 0;
+}

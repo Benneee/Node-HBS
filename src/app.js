@@ -44,6 +44,20 @@ app.get("/help", (req, res) => {
   });
 });
 
+// To match any page after help that wasn't originally declared
+app.get("/help/*", (req, res) => {
+  res.render("404", {
+    errorText: "Help article not found"
+  });
+});
+
+// Wildcard route => For inexistent routes
+app.get("*", (req, res) => {
+  res.render("404", {
+    errorText: "Page not found"
+  });
+});
+
 app.listen(3000, () => {
   log("Server is up on port 3000");
 });
