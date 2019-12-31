@@ -4,6 +4,14 @@ body {
   max-width: 55vw;
   margin: 0 auto;
   padding: 0 16px;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex-grow: 1;
 }
 
 footer {
@@ -23,8 +31,20 @@ h1 {
   margin-bottom: 1rem;
 }
 
+.portrait {
+  width: 250px;
+}
+
 header a {
   color: #888;
   margin-right: 1rem;
   text-decoration: none;
+}
+
+.not-found {
+  font-size: 15rem;
+}
+
+.center {
+  text-align: center;
 }
