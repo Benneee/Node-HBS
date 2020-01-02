@@ -52,11 +52,31 @@ app.get("/weather", (req, res) => {
       error: "Please enter an address"
     });
   }
-  res.send({
-    address: req.query.address,
-    forecast: "Harmattan is here",
-    location: "Lagos"
-  });
+
+  geocode(
+    req.query.address,
+    (error, { longitude, latitude, location } = {}) => {
+      if (error && error !== "undefined") {
+        res.send({
+          error
+        });
+      } else {
+        forecast(longitude, latitude, (error, forecastData) => {
+          if (error && error !== "undefined") {
+            res.send({
+              error
+            });
+          } else {
+            res.send({
+              address: req.query.address,
+              location,
+              forecast: forecastData
+            });
+          }
+        });
+      }
+    }
+  );
 });
 
 // To match any page after help that wasn't originally declared
