@@ -1,6 +1,8 @@
 const path = require("path");
 const express = require("express");
 const log = console.log;
+const geocode = require("./utils/geocode");
+const forecast = require("./utils/forecast");
 
 const hbs = require("hbs"); // Loading this in because we want to use partials
 
@@ -41,6 +43,19 @@ app.get("/help", (req, res) => {
     helpText:
       "This page will give you all the help you need for the weather app",
     name: "Benedict Nkeonye"
+  });
+});
+
+app.get("/weather", (req, res) => {
+  if (!req.query.address) {
+    return res.send({
+      error: "Please enter an address"
+    });
+  }
+  res.send({
+    address: req.query.address,
+    forecast: "Harmattan is here",
+    location: "Lagos"
   });
 });
 
