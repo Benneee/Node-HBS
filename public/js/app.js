@@ -15,7 +15,7 @@ function fetchWeather(e) {
   e.preventDefault();
   const address = query.value;
 
-  const geocodeUrl = `http://localhost:3000/weather?address=${address}`;
+  const geocodeUrl = `/weather?address=${address}`;
 
   if (address && address !== "") {
     message.textContent = "Loading Weather Forecast...";
